@@ -1,0 +1,85 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  TRAVELER
+  OWNER
+}
+
+enum BookingStatus {
+  PENDING
+  ACCEPTED
+  CANCELLED
+}
+
+model User {
+  id           String    @id @default(cuid())
+  role         Role
+  name         String
+  email        String    @unique
+  passwordHash String
+  phone        String?
+  about        String?
+  city         String?
+  state        String?
+  country      String?
+  languages    String?
+  gender       String?
+  avatarUrl    String?
+  properties   Property[]
+  bookings     Booking[] @relation("TravelerBookings")
+  favorites    Favorite[]
+  createdAt    DateTime  @default(now())
+}
+
+model Property {
+  id            String    @id @default(cuid())
+  owner         User      @relation(fields: [ownerId], references: [id])
+  ownerId       String
+  name          String
+  type          String
+  description   String?
+  address       String?
+  city          String?
+  state         String?
+  country       String?
+  pricePerNight Float
+  bedrooms      Int
+  bathrooms     Int
+  maxGuests     Int
+  amenities     Json?
+  photos        Json?
+  availableFrom DateTime?
+  availableTo   DateTime?
+  bookings      Booking[]
+  favorites     Favorite[]
+  createdAt     DateTime  @default(now())
+}
+
+model Booking {
+  id          String        @id @default(cuid())
+  traveler    User          @relation("TravelerBookings", fields: [travelerId], references: [id])
+  travelerId  String
+  property    Property      @relation(fields: [propertyId], references: [id])
+  propertyId  String
+  startDate   DateTime
+  endDate     DateTime
+  guests      Int
+  status      BookingStatus @default(PENDING)
+  createdAt   DateTime      @default(now())
+}
+
+model Favorite {
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  property   Property @relation(fields: [propertyId], references: [id])
+  propertyId String
+
+  @@id([userId, propertyId])
+}

@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+requests
+mysql-connector-python
+langchain
+langchain-ollama
+tavily-python

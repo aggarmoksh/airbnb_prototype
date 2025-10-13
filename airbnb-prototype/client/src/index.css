@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* optional tiny tweak */
+@layer base {
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+}
