@@ -18,10 +18,20 @@ const Users = (props) => (
   </svg>
 );
 const Heart = ({ filled }) => (
-  <svg viewBox="0 0 24 24" width="18" height="18">
+  <svg
+    viewBox="0 0 24 24"
+    width="18"
+    height="18"
+    aria-hidden="true"
+    preserveAspectRatio="xMidYMid meet"
+  >
     <path
-      d="M12 21s-7.5-5.2-9.6-8.2A5.6 5.6 0 114 6.2 5.9 5.9 0 0112 8a5.9 5.9 0 018-1.8 5.6 5.6 0 01.6 8.6C19.5 15.8 12 21 12 21z"
-      fill={filled ? '#ef4444' : '#ffffff'} stroke="#1f2937" strokeWidth="1"
+      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.54 0 3.09.81 4 2.09C11.41 4.81 12.96 4 14.5 4 17 4 19 6 19 8.5c0 3.78-3.4 6.86-8.55 11.53L12 21.35z"
+      fill={filled ? '#ef4444' : '#ffffff'}
+      stroke="#1f2937"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
