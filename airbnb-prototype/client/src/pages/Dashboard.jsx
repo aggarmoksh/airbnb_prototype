@@ -3,6 +3,7 @@ import api from '../api';
 import PropertyCard from '../components/PropertyCard.jsx';
 import AgentPanel from '../components/AgentPanel.jsx';
 import AgentModal from '../components/AgentModal.jsx';
+import AgentChatWidget from "../components/AgentChatWidget";
 
 
 export default function Dashboard(){
@@ -173,9 +174,10 @@ export default function Dashboard(){
         )}
       </div>
       
+      <AgentChatWidget endpoint="http://localhost:8001/agent/plan" />
 
       {/* Floating Agent AI button */}
-        <button
+        {/* <button
         onClick={()=>setAgentOpen(true)}
         className="fixed bottom-6 right-6 rounded-full px-5 py-3 bg-rose-500 text-white shadow-lg hover:scale-105 transition"
         >
@@ -187,7 +189,8 @@ export default function Dashboard(){
         onClose={()=>setAgentOpen(false)}
         seedBooking={{ location, start, end, guests }}
         userId={"me"}     // if you want the agent to pull the latest DB booking for this logged-in user
-        />
+        /> */}
+
 
 
       {/* Floating Agent AI button

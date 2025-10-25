@@ -6,4 +6,7 @@ requests
 mysql-connector-python
 langchain
 langchain-ollama
+langchain_groq
+langchain_openai
 tavily-python
+google-genai>=0.1.0
