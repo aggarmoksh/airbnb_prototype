@@ -282,6 +282,7 @@ CLIENT_ORIGIN=http://localhost:5173
 
 **AI Agent** (`ai-agent/.env`):
 ```env
+GOOGLE_API_KEY=your_gemini_api_key  => This is required (shifted to google api key for better responses)
 LLM_PROVIDER=ollama
 LLM_MODEL=llama3.1:8b
 TAVILY_API_KEY=your_tavily_key
