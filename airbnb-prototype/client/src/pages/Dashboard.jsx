@@ -4,6 +4,7 @@ import PropertyCard from '../components/PropertyCard.jsx';
 import AgentPanel from '../components/AgentPanel.jsx';
 import AgentModal from '../components/AgentModal.jsx';
 import AgentChatWidget from "../components/AgentChatWidget";
+import BookingsStatus from "../components/BookingsStatus.jsx";
 
 
 export default function Dashboard(){
@@ -129,6 +130,8 @@ export default function Dashboard(){
           </button>
         </div>
       </div>
+
+      <BookingsStatus />
 
       {/* Results */}
       <div className="min-h-[120px]">
