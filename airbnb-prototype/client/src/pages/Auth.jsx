@@ -1,11 +1,10 @@
-// client/src/pages/Auth.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
 import { useAuth } from '../context/AuthContext';
 
 export default function Auth() {
-  const [mode, setMode] = useState('signup'); // default to Sign up
+  const [mode, setMode] = useState('signup');
   const [role, setRole] = useState('TRAVELER');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -28,7 +27,6 @@ export default function Auth() {
       const { data } = await api.post(url, payload);
       setUser(data);
 
-      // Redirect to dashboard after successful auth
       nav('/', { replace: true });
     } catch (err) {
       setError(

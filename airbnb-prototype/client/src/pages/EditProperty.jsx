@@ -67,7 +67,6 @@ export default function EditProperty() {
     setUploading(true);
 
     try {
-      // Update property details
       const propertyData = {
         ...formData,
         amenities: JSON.stringify(formData.amenities),
@@ -79,7 +78,6 @@ export default function EditProperty() {
 
       await api.put(`/properties/${id}`, propertyData);
 
-      // Upload new photos if any
       if (newPhotos.length > 0) {
         const fd = new FormData();
         newPhotos.forEach(photo => fd.append('photos', photo));
@@ -295,7 +293,6 @@ export default function EditProperty() {
           </div>
         </section>
 
-        {/* Amenities */}
         <section>
           <h2 className="text-lg font-semibold mb-4">Amenities</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -313,7 +310,6 @@ export default function EditProperty() {
           </div>
         </section>
 
-        {/* Availability */}
         <section>
           <h2 className="text-lg font-semibold mb-4">Availability</h2>
           <div className="grid md:grid-cols-2 gap-4">
@@ -339,7 +335,6 @@ export default function EditProperty() {
           </div>
         </section>
 
-        {/* Existing Photos */}
         <section>
           <h2 className="text-lg font-semibold mb-4">Current Photos</h2>
           {photos.length > 0 ? (
@@ -366,7 +361,6 @@ export default function EditProperty() {
           )}
         </section>
 
-        {/* Add New Photos */}
         <section>
           <h2 className="text-lg font-semibold mb-4">Add New Photos</h2>
           <div>

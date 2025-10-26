@@ -52,7 +52,7 @@ export default function OwnerDashboard() {
     try {
       await api.delete(`/properties/${propertyId}`);
       setMsg('Property deleted successfully');
-      loadData(); // Reload data
+      loadData();
       setTimeout(() => setMsg(''), 3000);
     } catch (e) {
       setMsg(e.response?.data?.error || 'Failed to delete property');
@@ -111,7 +111,6 @@ export default function OwnerDashboard() {
         </div>
       </div>
 
-      {/* Tabs */}
       <div className="bg-white rounded-xl shadow">
         <div className="border-b">
           <div className="flex gap-1 p-1">
@@ -149,7 +148,6 @@ export default function OwnerDashboard() {
         </div>
 
         <div className="p-4">
-          {/* Properties Tab */}
           {activeTab === 'properties' && (
             <div>
               {properties.length === 0 ? (
@@ -179,7 +177,6 @@ export default function OwnerDashboard() {
                         </div>
                       )}
                       
-                      {/* Property Details */}
                       <div className="p-4">
                         <h3 className="font-semibold text-lg mb-1">{p.name}</h3>
                         <p className="text-sm text-gray-600 mb-2">
@@ -217,7 +214,6 @@ export default function OwnerDashboard() {
             </div>
           )}
 
-          {/* Booking Requests Tab */}
           {activeTab === 'bookings' && (
             <div>
               {pendingBookings.length === 0 ? (
@@ -262,10 +258,8 @@ export default function OwnerDashboard() {
             </div>
           )}
 
-          {/* Booking History Tab */}
           {activeTab === 'history' && (
             <div className="space-y-6">
-              {/* Accepted Bookings */}
               {acceptedBookings.length > 0 && (
                 <div>
                   <h3 className="font-semibold text-lg mb-3 text-green-700">Accepted Bookings</h3>
@@ -292,7 +286,6 @@ export default function OwnerDashboard() {
                 </div>
               )}
 
-              {/* Cancelled Bookings */}
               {cancelledBookings.length > 0 && (
                 <div>
                   <h3 className="font-semibold text-lg mb-3 text-gray-700">Cancelled Bookings</h3>

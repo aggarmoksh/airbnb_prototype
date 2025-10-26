@@ -15,8 +15,8 @@ function Field({ label, children }) {
 export default function AgentPanel({
   open,
   onClose,
-  seedBooking,   // { location, start, end, guests }
-  userId         // if you want to use "latest booking" from DB
+  seedBooking,
+  userId
 }) {
   const [freeText, setFreeText] = useState('');
   const [useSearchBooking, setUseSearchBooking] = useState(true);

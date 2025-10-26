@@ -12,7 +12,6 @@ import Profile from './pages/Profile.jsx';
 
 const SERVER = 'http://localhost:4000';
 
-/** Error boundary so crashes show instead of white screen */
 class ErrorBoundary extends React.Component {
   constructor(props){ super(props); this.state = { hasError:false, err:null }; }
   static getDerivedStateFromError(err){ return { hasError:true, err }; }
@@ -90,12 +89,10 @@ function Header() {
   );
 }
 
-// Component to route based on user role
 function RoleBasedHome() {
   const { user } = useAuth();
   if (!user) return <Navigate to="/auth" replace />;
   
-  // Route based on role
   if (user.role === 'OWNER') {
     return <OwnerDashboard />;
   }
@@ -110,7 +107,6 @@ export default function App(){
         <Routes>
           <Route path="/auth" element={<Auth />} />
           
-          {/* Home - Role-based routing */}
           <Route
             path="/"
             element={
@@ -120,7 +116,6 @@ export default function App(){
             }
           />
 
-          {/* Owner-only routes */}
           <Route
             path="/property/add"
             element={
@@ -138,7 +133,6 @@ export default function App(){
             }
           />
 
-          {/* Shared routes */}
           <Route
             path="/properties/:id"
             element={

@@ -7,12 +7,11 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check session on first load
   useEffect(() => {
     let alive = true;
     (async () => {
       try {
-        const r = await api.get('/auth/me'); // expects { user: {...} }
+        const r = await api.get('/auth/me');
         if (alive) setUser(r.data.user);
       } catch {
         if (alive) setUser(null);

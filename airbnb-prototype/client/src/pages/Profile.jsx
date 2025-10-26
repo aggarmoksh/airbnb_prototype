@@ -19,19 +19,11 @@ export default function Profile(){
     setMsg('Saved');
   };
 
-//   const upload = async () => {
-//     if (!file) return;
-//     const fd = new FormData();
-//     fd.append('avatar', file);
-//     const r = await api.post('/users/avatar', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
-//     setMe(r.data);
-//   };
   const upload = async () => {
 
     if (!file) return;
     const fd = new FormData();
     fd.append('avatar', file);
-    // Do NOT set Content-Type manually; Axios will add the boundary.
     const r = await api.post('/users/avatar', fd);
     setMe(r.data);
   };

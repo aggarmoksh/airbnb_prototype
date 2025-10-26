@@ -8,7 +8,6 @@ export default function AgentModal({ open, onClose }) {
 
   const ask = async () => {
     if (!q.trim()) return;
-    // Stubbed agent reply; wire to your backend/LLM when ready.
     setLog(l => [...l, { role: 'you', text: q }, { role: 'agent', text: `I received: "${q}"` }]);
     setQ('');
   };

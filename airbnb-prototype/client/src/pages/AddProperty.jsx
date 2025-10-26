@@ -44,7 +44,6 @@ export default function AddProperty() {
     setUploading(true);
 
     try {
-      // Create property
       const propertyData = {
         ...formData,
         amenities: JSON.stringify(formData.amenities),
@@ -56,14 +55,13 @@ export default function AddProperty() {
 
       const { data: property } = await api.post('/properties', propertyData);
 
-      // Upload photos if any
       if (photos.length > 0) {
         const fd = new FormData();
         photos.forEach(photo => fd.append('photos', photo));
         await api.post(`/properties/${property.id}/photos`, fd);
       }
 
-      nav('/'); // Go back to owner dashboard
+      nav('/');
     } catch (e) {
       setError(e.response?.data?.error || 'Failed to create property');
     } finally {
@@ -94,7 +92,6 @@ export default function AddProperty() {
       )}
 
       <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow p-6 space-y-6">
-        {/* Basic Info */}
         <section>
           <h2 className="text-lg font-semibold mb-4">Basic Information</h2>
           <div className="grid md:grid-cols-2 gap-4">
@@ -154,7 +151,6 @@ export default function AddProperty() {
           </div>
         </section>
 
-        {/* Location */}
         <section>
           <h2 className="text-lg font-semibold mb-4">Location</h2>
           <div className="grid md:grid-cols-2 gap-4">
@@ -207,7 +203,6 @@ export default function AddProperty() {
           </div>
         </section>
 
-        {/* Property Details */}
         <section>
           <h2 className="text-lg font-semibold mb-4">Property Details</h2>
           <div className="grid grid-cols-3 gap-4">
@@ -250,7 +245,6 @@ export default function AddProperty() {
           </div>
         </section>
 
-        {/* Amenities */}
         <section>
           <h2 className="text-lg font-semibold mb-4">Amenities</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -268,7 +262,6 @@ export default function AddProperty() {
           </div>
         </section>
 
-        {/* Availability */}
         <section>
           <h2 className="text-lg font-semibold mb-4">Availability</h2>
           <div className="grid md:grid-cols-2 gap-4">
@@ -294,7 +287,6 @@ export default function AddProperty() {
           </div>
         </section>
 
-        {/* Photos */}
         <section>
           <h2 className="text-lg font-semibold mb-4">Photos</h2>
           <div>
@@ -314,7 +306,6 @@ export default function AddProperty() {
           </div>
         </section>
 
-        {/* Submit */}
         <div className="flex gap-3">
           <button
             type="button"

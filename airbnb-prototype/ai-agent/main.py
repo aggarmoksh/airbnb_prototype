@@ -16,8 +16,8 @@ from langchain_core.prompts import ChatPromptTemplate
 
 load_dotenv()
 
-LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama").lower()         # ollama | groq | openai
-LLM_MODEL    = os.getenv("LLM_MODEL", "").strip()                   # e.g. llama3.1:8b or gpt-4o-mini
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama").lower()
+LLM_MODEL    = os.getenv("LLM_MODEL", "").strip()
 CORS_ORIGIN  = os.getenv("CORS_ORIGIN", "http://localhost:5173")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY", "")
 
@@ -82,7 +82,7 @@ class AgentOutput(BaseModel):
 def mysql_conn():
     return mysql.connector.connect(
         host=os.getenv("MYSQL_HOST", "127.0.0.1"),
-        port=int(os.getenv("MYSQL_PORT", "3307")),  # default 3307 to match your Docker mapping
+        port=int(os.getenv("MYSQL_PORT", "3307")),
         user=os.getenv("MYSQL_USER", "root"),
         password=os.getenv("MYSQL_PASSWORD", ""),
         database=os.getenv("MYSQL_DB", "airbnb_dev"),
@@ -181,7 +181,6 @@ def tavily_search(query: str, location: str, start: dt.date, end: dt.date, max_k
         "include_raw_content": False,
     }
     try:
-        # Preferred header auth
         r = requests.post(
             "https://api.tavily.com/search",
             headers={"Content-Type": "application/json", "X-API-KEY": TAVILY_API_KEY},
@@ -189,7 +188,6 @@ def tavily_search(query: str, location: str, start: dt.date, end: dt.date, max_k
             timeout=20,
         )
         if r.status_code == 401:
-            # Legacy fallback
             r = requests.post(
                 "https://api.tavily.com/search",
                 headers={"Content-Type": "application/json"},

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-/* ---------- tiny, safe Markdown renderer (no deps) ---------- */
 function escapeHtml(s) {
   return s
     .replace(/&/g, "&amp;")
@@ -9,7 +8,6 @@ function escapeHtml(s) {
 }
 function renderMarkdown(src) {
   if (!src) return "";
-  // 1) Extract code fences first so formatting inside stays intact
   const fences = [];
   src = src.replace(/```([\s\S]*?)```/g, (_, code) => {
     const i = fences.length;
@@ -17,23 +15,18 @@ function renderMarkdown(src) {
     return `§§FENCE${i}§§`;
   });
 
-  // 2) Escape everything else
   let s = escapeHtml(src);
 
-  // 3) HR
   s = s.replace(/^\s*---\s*$/gm, '<hr style="border:none;border-top:1px dashed #e5e7eb;margin:8px 0;" />');
 
-  // 4) Headings
   s = s.replace(/^###\s+(.+)$/gm, '<h3 style="margin:10px 0 6px;font-size:14px;font-weight:800;color:#111827;">$1</h3>');
   s = s.replace(/^##\s+(.+)$/gm,  '<h2 style="margin:12px 0 6px;font-size:16px;font-weight:800;color:#111827;">$1</h2>');
   s = s.replace(/^#\s+(.+)$/gm,   '<h1 style="margin:12px 0 6px;font-size:18px;font-weight:800;color:#111827;">$1</h1>');
 
-  // 5) Bold / italic / inline code
   s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   s = s.replace(/(^|[^\*])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>');
   s = s.replace(/`([^`\n]+)`/g, '<code style="background:#f3f4f6;border:1px solid #e5e7eb;border-radius:6px;padding:0 4px;">$1</code>');
 
-  // 6) Lists (unordered + ordered)
   const blockToList = (text, markerRegex, tag) => {
     const lines = text.split("\n");
     const out = [];
@@ -60,7 +53,6 @@ function renderMarkdown(src) {
   s = blockToList(s, /^\s*[-*]\s+/, "ul");
   s = blockToList(s, /^\s*\d+\.\s+/, "ol");
 
-  // 7) Paragraphs: two newlines → paragraph breaks
   s = s
     .split(/\n{2,}/)
     .map(chunk =>
@@ -70,12 +62,10 @@ function renderMarkdown(src) {
     )
     .join("");
 
-  // 8) Restore code fences
   s = s.replace(/§§FENCE(\d+)§§/g, (_, i) => fences[Number(i)]);
 
   return s;
 }
-/* ------------------------------------------------------------ */
 
 export default function AgentChatWidget({
   endpoint = "http://localhost:8001/agent/plan",
@@ -88,7 +78,6 @@ export default function AgentChatWidget({
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef(null);
 
-  // remember recent turns for context
   const [conversationId] = useState(() => {
     const k = "agent:conversationId";
     const v = localStorage.getItem(k);
@@ -135,7 +124,6 @@ export default function AgentChatWidget({
     if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
   }
 
-  // styles
   const S = {
     root: { position: "fixed", right: 16, bottom: 16, zIndex: 9999, fontFamily: "Inter, system-ui, Arial" },
     fab: { display: "flex", gap: 8, alignItems: "center", borderRadius: 999, background: "#111827", color: "#fff", padding: "10px 14px", border: "1px solid #0b1220", boxShadow: "0 12px 30px rgba(0,0,0,.25)", cursor: "pointer" },
